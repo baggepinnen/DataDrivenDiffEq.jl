@@ -15,7 +15,8 @@ koopman = DMD(X[:, 1:end-1], X[:, 2:end], U, alg = alg)
 ```
 """
 function DMDc(X::AbstractArray, U::AbstractArray; B::AbstractArray = [], alg::AbstractKoopmanAlgorithm = DMDPINV())
-    return DMDc(X[:, 1:end-1], X[:, 2:end], U, B = B, alg = alg)
+    Uin = size(U, 2) == size(X, 2)-1 ? U : U[:, 1:end-1]
+    return DMDc(X[:, 1:end-1], X[:, 2:end], Uin, B = B, alg = alg)
 end
 
 function DMDc(X::AbstractArray, Y::AbstractArray, U::AbstractArray; B::AbstractArray = [], alg::AbstractKoopmanAlgorithm = DMDPINV())
